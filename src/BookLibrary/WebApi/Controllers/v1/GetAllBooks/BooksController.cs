@@ -15,9 +15,10 @@ public class BooksController : ValidatorControllerBase
     {
         _useCase = useCase;
     }
+
     [HttpGet("/{page:int}")]
-    public async Task<IActionResult> GetAllBooks([FromRoute] int page = 1)
+    public async Task<IActionResult> GetAllBooks([FromRoute] int page = 1, [FromQuery] int itemsPerPage = 6)
     {
-        return Ok(await _useCase.Execute(page));
+        return Ok(await _useCase.Execute(page, itemsPerPage));
     }
 }

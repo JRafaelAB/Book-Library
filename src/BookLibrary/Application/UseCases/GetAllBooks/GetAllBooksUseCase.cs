@@ -11,10 +11,10 @@ public class GetAllBooksUseCase : IGetAllBooksUseCase
     {
         _bookRepository = bookRepository;
     }
-    public async Task<PaginationDto<BookDto>> Execute(int page)
+    public async Task<PaginationDto<BookDto>> Execute(int page, int itemsPerPage)
     {
         var books = await _bookRepository.GetAllBooks();
-        return new PaginationDto<BookDto>(books, page);
+        return new PaginationDto<BookDto>(books, page, itemsPerPage);
     } 
     
 }

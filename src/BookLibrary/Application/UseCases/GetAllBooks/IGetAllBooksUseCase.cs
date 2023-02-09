@@ -4,5 +4,5 @@ namespace Application.UseCases.GetAllBooks;
 
 public interface IGetAllBooksUseCase
 {
-    Task<PaginationDto<BookDto>> Execute(int page);
+    Task<PaginationDto<BookDto>> Execute(int page, int itemsPerPage);
 }

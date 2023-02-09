@@ -6,13 +6,14 @@ namespace Domain.DTOs;
 public class PaginationDto<T>
 {
     public int TotalOfItems { get; }
-    public const int ItemsPerPage = 6;
+    public int ItemsPerPage { get; }
     public int CurrentPage { get; }
     public int TotalPages { get; private set; }
     public List<T> Items { get; private set; }
 
-    public PaginationDto(List<T> items, int page)
+    public PaginationDto(List<T> items, int page, int itemsPerPage)
     {
+        ItemsPerPage = itemsPerPage;
         TotalOfItems = items.Count;
         SetTotalPages();
         CurrentPage = page;

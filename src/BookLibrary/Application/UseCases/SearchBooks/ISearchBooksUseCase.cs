@@ -4,5 +4,5 @@ namespace Application.UseCases.SearchBooks;
 
 public interface ISearchBooksUseCase
 {
-    Task<PaginationDto<BookDto>> Execute(string searchKey, int page);
+    Task<PaginationDto<BookDto>> Execute(string searchKey, int page, int itemsPerPage);
 }
