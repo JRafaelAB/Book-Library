@@ -2,9 +2,9 @@
 using WebApi.Controllers.Base;
 
 namespace WebApi.Controllers.v1.HelloWorld;
-
+[ApiVersion("1.0")]
 [ApiController]
-[Route("[controller]")]
+[Route("v{version:apiVersion}/[controller]")]
 public class HelloWorldController : ValidatorControllerBase
 {
     [HttpGet]
