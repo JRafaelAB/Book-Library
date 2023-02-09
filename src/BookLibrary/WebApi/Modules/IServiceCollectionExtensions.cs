@@ -14,7 +14,8 @@ internal static class IServiceCollectionExtensions
             .AddSQLServer(configuration)
             .AddUseCases()
             .AddControllers();
-        
+
+        services.AddCors();
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.SuppressModelStateInvalidFilter = true;
