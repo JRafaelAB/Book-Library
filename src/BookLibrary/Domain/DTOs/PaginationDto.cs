@@ -3,7 +3,7 @@
 public class PaginationDto<T>
 {
     public int TotalOfItems { get; }
-    public const int ItemsPerPage = 10;
+    public const int ItemsPerPage = 4;
     public int CurrentPage { get; }
     public int TotalPages { get; private set; }
     public List<T> Items { get; private set; }
@@ -35,6 +35,7 @@ public class PaginationDto<T>
         {
             var begin = (CurrentPage - 1) * ItemsPerPage;
             var end = CurrentPage * ItemsPerPage - 1 > TotalOfItems ? TotalOfItems - 1 : CurrentPage * ItemsPerPage - 1;
+            end -= begin-1;
             Items = items.GetRange(begin, end); 
         }
     }

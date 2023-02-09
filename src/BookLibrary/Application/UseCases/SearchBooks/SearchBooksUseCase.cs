@@ -1,13 +1,20 @@
 ﻿using Domain.DTOs;
+using Domain.Repositories;
 
 namespace Application.UseCases.SearchBooks;
 
 public class SearchBooksUseCase : ISearchBooksUseCase
 {
-    public async Task<PaginationDto<BookDto>> Execute(string searchKey)
-    {
-        await Task.WhenAny();
+    private readonly IBookRepository _bookRepository;
 
-        return new PaginationDto<BookDto>(new List<BookDto>(), 1);
+    public SearchBooksUseCase(IBookRepository bookRepository)
+    {
+        _bookRepository = bookRepository;
+    }
+    public async Task<PaginationDto<BookDto>> Execute(string searchKey, int page)
+    {
+        var books = await _bookRepository.GetBooks(searchKey);
+        var test = new PaginationDto<BookDto>(books, page);
+        return test;
     } 
 }

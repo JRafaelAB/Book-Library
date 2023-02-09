@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.UseCases.SearchBooks;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Base;
 
 namespace WebApi.Controllers.v1.SearchBooks;
@@ -8,9 +9,16 @@ namespace WebApi.Controllers.v1.SearchBooks;
 [Route("v{version:apiVersion}/[controller]")]
 public class BooksController : ValidatorControllerBase
 {
-    [HttpGet]
-    public IActionResult GetHelloWorld()
+    private readonly ISearchBooksUseCase _useCase;
+
+    public BooksController(ISearchBooksUseCase useCase)
     {
-        return Ok("Hello World!");
+        _useCase = useCase;
+    }
+    
+    [HttpGet("/{searchKey}/{page:int}")]
+    public async Task<IActionResult> SearchBooks([FromRoute] string searchKey, [FromRoute] int page = 1)
+    {
+        return Ok(await _useCase.Execute(searchKey, page));
     }
 }

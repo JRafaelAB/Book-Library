@@ -16,7 +16,12 @@ public class BookRepository : IBookRepository
 
     public async Task<List<BookDto>> GetBooks(string searchKey)
     {
-        var books = this._context.Books.AsQueryable();
-        return await books.Where(book => book.ContainsSearch(searchKey)).Select(book => new BookDto(book)).ToListAsync();
+        var books = await this._context.Books.ToListAsync();
+        return books.Where(book => book.ContainsSearch(searchKey)).Select(book => new BookDto(book)).ToList();
+    }
+    
+    public async Task<List<BookDto>> GetAllBooks()
+    {
+       return await this._context.Books.Select(book => new BookDto(book)).ToListAsync();
     }
 }

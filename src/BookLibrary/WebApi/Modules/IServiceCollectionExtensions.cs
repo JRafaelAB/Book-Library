@@ -12,6 +12,7 @@ internal static class IServiceCollectionExtensions
             .AddSwagger()
             .AddVersioning()
             .AddSQLServer(configuration)
+            .AddUseCases()
             .AddControllers();
         
         services.Configure<ApiBehaviorOptions>(options =>
