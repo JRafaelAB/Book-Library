@@ -4,7 +4,7 @@ using Infrastructure.DataAccess.Contexts;
 using Moq;
 using Xunit;
 
-namespace UnitTests;
+namespace UnitTests.DataAccess;
 
 public class UnitOfWorkTest
 {
