@@ -13,11 +13,11 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.ConfigureSwagger(app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
 
+app.UseCors(options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader());
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
 
 app.MapControllers();
 
