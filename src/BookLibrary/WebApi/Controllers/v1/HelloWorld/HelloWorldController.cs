@@ -2,6 +2,7 @@
 using WebApi.Controllers.Base;
 
 namespace WebApi.Controllers.v1.HelloWorld;
+
 [ApiVersion("1.0")]
 [ApiController]
 [Route("v{version:apiVersion}/[controller]")]

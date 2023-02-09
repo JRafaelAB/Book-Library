@@ -1,4 +1,4 @@
-﻿using Asp.Versioning;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Modules.ServiceCollectionExtensions;
 
@@ -12,7 +12,6 @@ internal static class VersioningExtensions
                 options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ApiVersionReader = new HeaderApiVersionReader("api-version");
             });
 
         services

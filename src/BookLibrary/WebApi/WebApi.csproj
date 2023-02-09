@@ -13,12 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Modules\Swagger" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Asp.Versioning.Http" Version="6.4.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
     </ItemGroup>
 
 </Project>
