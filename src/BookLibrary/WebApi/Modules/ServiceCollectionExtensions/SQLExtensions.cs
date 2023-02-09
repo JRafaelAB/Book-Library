@@ -10,7 +10,7 @@ internal static class SQLExtensions
 {
     public static IServiceCollection AddSQLServer(this IServiceCollection services, IConfiguration configuration)
     {
-        string connectionString = configuration.GetValue<string>(ConfigurationConstants.SQL_CLOCK_CONNECTION_STRING) ?? string.Empty;
+        string connectionString = configuration.GetConnectionString(ConnectionStringsConstants.LIBRARY_CONNECTION);
         
         services.AddDbContext<LibraryContext>(
             options =>

@@ -7,30 +7,35 @@ public class Book
 {
     public long Id { get; init; }
     [MaxLength(100)]
-    public string Title { get; }
+    public string Title { get; init; }
     [MaxLength(50)]
-    public string FirstName { get; }
+    public string FirstName { get; init; }
     [MaxLength(50)]
-    public string LastName { get; }
-    public int TotalCopies { get; }
-    public int CopiesInUse { get; }
+    public string LastName { get; init; }
+    public int TotalCopies { get; init; }
+    public int CopiesInUse { get; init; }
     [MaxLength(50)]
-    public string Type { get; }
+    public string Type { get; init; }
     [MaxLength(80)]
-    public string ISBN { get; }
+    public string ISBN { get; init; }
     [MaxLength(50)]
-    public string Category { get; }
+    public string Category { get; init; }
 
-    public Book(string title, string firstName, string lastName, int totalCopies, int copiesInUse, string type, string isbn, string category)
+    private Book()
     {
-        Title = title;
-        FirstName = firstName;
-        LastName = lastName;
-        TotalCopies = totalCopies;
-        CopiesInUse = copiesInUse;
-        Type = type;
-        ISBN = isbn;
-        Category = category;
+        
+    }
+    
+    public Book(string Title, string FirstName, string LastName, int TotalCopies, int CopiesInUse, string Type, string ISBN, string Category)
+    {
+        this.Title = Title;
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.TotalCopies = TotalCopies;
+        this.CopiesInUse = CopiesInUse;
+        this.Type = Type;
+        this.ISBN = ISBN;
+        this.Category = Category;
     }
 
     public Book(BookDto book)
