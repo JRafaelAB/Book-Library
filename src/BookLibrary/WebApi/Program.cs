@@ -5,7 +5,7 @@ using WebApi.Modules.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDependencyInjections();
+builder.Services.AddDependencyInjections(builder.Configuration);
 
 var app = builder.Build();
 
