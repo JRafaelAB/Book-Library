@@ -2,8 +2,7 @@ using WebApi.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddVersioning();
+builder.Services.AddDependencyInjections();
 
 var app = builder.Build();
 

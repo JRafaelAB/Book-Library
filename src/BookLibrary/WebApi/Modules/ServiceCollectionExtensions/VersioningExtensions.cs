@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 
-namespace WebApi.Modules;
+namespace WebApi.Modules.ServiceCollectionExtensions;
 
 internal static class VersioningExtensions
 {
