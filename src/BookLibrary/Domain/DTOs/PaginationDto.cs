@@ -1,4 +1,7 @@
-﻿namespace Domain.DTOs;
+﻿using Domain.Exceptions;
+using Domain.Resources;
+
+namespace Domain.DTOs;
 
 public class PaginationDto<T>
 {
@@ -19,7 +22,7 @@ public class PaginationDto<T>
 
     private void CheckOutOfRange()
     {
-        if (CurrentPage < 1 || CurrentPage > TotalPages) throw new IndexOutOfRangeException();
+        if (CurrentPage < 1 || CurrentPage > TotalPages) throw new PageOutOfRangeException(Messages.PageOutOfRange);
     }
 
     private void SetTotalPages()

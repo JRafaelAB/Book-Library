@@ -9,14 +9,9 @@ builder.Services.AddDependencyInjections(builder.Configuration);
 
 var app = builder.Build();
 
-app.ConfigureSwagger(app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
-app.UseExceptionHandler(appError =>
-{
-    appError.Run(async context => 
-        await ExceptionHandlerMiddleware.ExceptionHandler
-            (context, app.Services.GetRequiredService<ILogger>()));
-});
+app.ConfigureSwagger(app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
 
 app.UseHttpsRedirection();
 

@@ -27,4 +27,7 @@
     <data name="ArgumentStringNullOrEmpty" xml:space="preserve">
         <value>Argument string cannot be null or empty.</value>
     </data>
+    <data name="PageOutOfRange" xml:space="preserve">
+        <value>Requested page is out of range.</value>
+    </data>
 </root>

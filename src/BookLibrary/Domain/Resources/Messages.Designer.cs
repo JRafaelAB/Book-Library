@@ -86,5 +86,14 @@ namespace Domain.Resources {
                 return ResourceManager.GetString("InvalidRequest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested page is out of range..
+        /// </summary>
+        public static string PageOutOfRange {
+            get {
+                return ResourceManager.GetString("PageOutOfRange", resourceCulture);
+            }
+        }
     }
 }

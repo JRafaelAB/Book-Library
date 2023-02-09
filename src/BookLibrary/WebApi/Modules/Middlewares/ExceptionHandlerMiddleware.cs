@@ -1,38 +1,44 @@
 ﻿using System.Net.Mime;
 using Domain.Exceptions;
 using Domain.Resources;
-using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 
 namespace WebApi.Modules.Middlewares;
 
-internal static class ExceptionHandlerMiddleware
+public class ExceptionHandlerMiddleware
 {
-    public static async Task ExceptionHandler(HttpContext context, ILogger logger)
+    private readonly RequestDelegate _next;
+
+    public ExceptionHandlerMiddleware(RequestDelegate next)
     {
-        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-        context.Response.ContentType = MediaTypeNames.Application.Json;
-        if (contextFeature != null)
+        _next = next;
+    }
+    
+    public async Task Invoke(HttpContext context)
+    {
+        try
         {
-            switch (contextFeature.Error)
+            await _next(context);
+        }
+        catch (Exception error)
+        {
+            var response = context.Response;
+            response.ContentType = MediaTypeNames.Application.Json;
+
+            switch (error)
             {
                 case InvalidRequestException invalidRequest:
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    logger.LogError($"Invalid Request: {JsonConvert.SerializeObject(invalidRequest)}");
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest));
-                    break;
-
-                case IndexOutOfRangeException invalidRequest:
-                    context.Response.StatusCode = StatusCodes.Status416RangeNotSatisfiable;
-                    logger.LogError($"Invalid Request: {JsonConvert.SerializeObject(invalidRequest)}");
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest));
-                    break;
-                
+                    response.StatusCode = StatusCodes.Status400BadRequest;
+                    await response.WriteAsync(JsonConvert.SerializeObject(new { message = invalidRequest.ErrorMessages }));
+                    return;
+                case PageOutOfRangeException invalidRequest:
+                    response.StatusCode = StatusCodes.Status416RangeNotSatisfiable;
+                    await response.WriteAsync(JsonConvert.SerializeObject(new { message = invalidRequest.Message }));
+                    return;
                 default:
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    logger.LogError($"Unexpected Error: {contextFeature.Error}");
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(Messages.InternalServerError));
-                    break;
+                    response.StatusCode = StatusCodes.Status500InternalServerError;
+                    await response.WriteAsync(JsonConvert.SerializeObject(new { message = Messages.InternalServerError }));
+                    return;
             }
         }
     }
