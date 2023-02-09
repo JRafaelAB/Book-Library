@@ -22,6 +22,12 @@ internal static class ExceptionHandlerMiddleware
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest));
                     break;
 
+                case IndexOutOfRangeException invalidRequest:
+                    context.Response.StatusCode = StatusCodes.Status416RangeNotSatisfiable;
+                    logger.LogError($"Invalid Request: {JsonConvert.SerializeObject(invalidRequest)}");
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(invalidRequest));
+                    break;
+                
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     logger.LogError($"Unexpected Error: {contextFeature.Error}");

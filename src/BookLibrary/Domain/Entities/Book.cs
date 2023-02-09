@@ -50,4 +50,13 @@ public class Book
         ISBN = book.ISBN;
         Category = book.Category;
     }
+
+    public bool ContainsSearch(string searchKey)
+    {
+        return Title.Contains(searchKey)
+               || FirstName.Contains(searchKey)
+               || LastName.Contains(searchKey)
+               || Category.Contains(searchKey)
+               || ISBN.Contains(searchKey);
+    }
 }
