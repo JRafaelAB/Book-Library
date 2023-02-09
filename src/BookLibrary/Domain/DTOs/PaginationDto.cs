@@ -37,7 +37,8 @@ public class PaginationDto<T>
         else
         {
             var begin = (CurrentPage - 1) * ItemsPerPage;
-            var end = (CurrentPage * ItemsPerPage - 1 > TotalOfItems ? TotalOfItems - 1 : CurrentPage * ItemsPerPage - 1) - begin-1;
+            var end = (CurrentPage * ItemsPerPage - 1 > TotalOfItems ? TotalOfItems - 1 : CurrentPage * ItemsPerPage - 1);
+            end -= begin - 1;
             Items = items.GetRange(begin, end); 
         }
     }

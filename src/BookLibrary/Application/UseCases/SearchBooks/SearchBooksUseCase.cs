@@ -14,7 +14,6 @@ public class SearchBooksUseCase : ISearchBooksUseCase
     public async Task<PaginationDto<BookDto>> Execute(string searchKey, int page)
     {
         var books = await _bookRepository.GetBooks(searchKey);
-        var test = new PaginationDto<BookDto>(books, page);
-        return test;
+        return new PaginationDto<BookDto>(books, page);
     } 
 }
