@@ -16,7 +16,7 @@ public class BooksController : ValidatorControllerBase
         _useCase = useCase;
     }
     
-    [HttpGet("/{searchKey}/{page:int}")]
+    [HttpGet("{searchKey}/{page:int}")]
     public async Task<IActionResult> SearchBooks([FromRoute] string searchKey, [FromRoute] int page = 1, [FromQuery] int itemsPerPage = 6)
     {
         return Ok(await _useCase.Execute(searchKey, page, itemsPerPage));
