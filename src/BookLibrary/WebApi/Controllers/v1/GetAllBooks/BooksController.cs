@@ -1,11 +1,9 @@
 ﻿using Application.UseCases.GetAllBooks;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Base;
 
 namespace WebApi.Controllers.v1.GetAllBooks;
 
-[DisableCors]
 [ApiVersion("1.0")]
 [ApiController]
 [Route("v{version:apiVersion}/[controller]")]
